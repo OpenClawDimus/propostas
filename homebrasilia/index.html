@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta Dimus — Homebrasília</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-base: #0A0D0B;
+  --bg-card: #111411;
+  --green: #0F8A5C;
+  --gold: #C9A14A;
+  --text: #E8E8E8;
+  --muted: #8A8F8C;
+  --border: #1E2420;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg-base);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.brand-mark {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(10,13,11,0.95), transparent);
+  z-index: 100;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.brand-mark .dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 0 0 8px rgba(15,138,92,0.6);
+}
+.brand-mark .client {
+  color: var(--gold);
+  font-weight: 700;
+}
+.deck {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 32px 60px;
+}
+.slide {
+  min-height: 90vh;
+  padding: 60px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.slide:last-child { border-bottom: none; }
+.kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 16px;
+}
+h1, h2, h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+h1 { font-size: clamp(48px, 8vw, 96px); }
+h2 { font-size: clamp(36px, 5vw, 64px); margin-bottom: 24px; }
+h3 { font-size: clamp(24px, 3vw, 36px); margin-bottom: 16px; color: var(--gold); }
+p { font-size: 18px; color: var(--text); margin-bottom: 16px; max-width: 800px; }
+ul { list-style: none; padding: 0; }
+li {
+  padding: 12px 0 12px 24px;
+  position: relative;
+  font-size: 18px;
+  color: var(--text);
+}
+li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+.metric {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.metric-label {
+  font-size: 14px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 8px;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin-top: 32px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  transition: all 0.3s ease;
+}
+.card:hover {
+  border-color: var(--green);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(15,138,92,0.15);
+}
+.card h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.card p {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 0;
+}
+.highlight-box {
+  background: linear-gradient(135deg, rgba(15,138,92,0.1), rgba(201,161,74,0.05));
+  border-left: 4px solid var(--green);
+  padding: 24px 32px;
+  border-radius: 8px;
+  margin: 24px 0;
+}
+.price-tag {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px;
+  color: var(--gold);
+  line-height: 1;
+}
+.cta {
+  display: inline-block;
+  padding: 16px 40px;
+  background: var(--green);
+  color: var(--bg-base);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 8px;
+  margin-top: 32px;
+  transition: all 0.3s ease;
+}
+.cta:hover {
+  background: #0F9A6C;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15,138,92,0.3);
+}
+.footer {
+  text-align: center;
+  padding: 40px;
+  color: var(--muted);
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.timeline {
+  position: relative;
+  padding-left: 32px;
+  margin: 24px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--green);
+}
+.timeline-item {
+  position: relative;
+  padding: 16px 0 16px 24px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 24px;
+  width: 10px;
+  height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  border: 2px solid var(--bg-base);
+}
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(15,138,92,0.15);
+  color: var(--green);
+  border-radius: 20px;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+</style>
+</head>
+<body>
+<div class="brand-mark">
+  <span><span class="dot"></span>DIMUS × <span class="client">HOMEBRASÍLIA</span></span>
+  <span>PROPOSTA COMERCIAL</span>
+</div>
+
+<div class="deck">
+
+  <!-- Slide 1: Capa -->
+  <section class="slide">
+    <div class="kicker">Sistema de Conteúdo + IA + Tráfego</div>
+    <h1>Homebrasília</h1>
+    <h2>Conteúdo que converte imóvel alto padrão</h2>
+    <p>Curadoria de conteúdo, assessoria técnica baseada em indicadores e tráfego pago para corretores.</p>
+    <div class="highlight-box">
+      <p style="margin: 0; font-size: 16px;">Proposta comercial Dimus • Sistema único • 4 pilares integrados</p>
+    </div>
+  </section>
+
+  <!-- Slide 2: Diagnóstico -->
+  <section class="slide">
+    <div class="kicker">Diagnóstico</div>
+    <h2>O cenário atual</h2>
+    <div class="grid-2">
+      <div>
+        <h3>Oportunidade</h3>
+        <p>Nicho de alto padrão em Brasília tem baixa concorrência de conteúdo profissional. A maioria posta só foto de imóvel; poucos fazem autoridade, educação e curadoria.</p>
+      </div>
+      <div>
+        <h3>Dor do corretor</h3>
+        <p>Lead qualificado demora para chegar. Conteúdo institucional não gera engajamento nem conversão. Falta padrão de análise para saber o que funciona.</p>
+      </div>
+    </div>
+    <div class="highlight-box" style="margin-top: 32px;">
+      <p style="margin: 0;"><strong>Conclusão:</strong> o problema não é falta de conteúdo, é falta de sistema. O Studio + IA mede referência real, replica padrão vencedor e escala produção sem perder o tom da marca.</p>
+    </div>
+  </section>
+
+  <!-- Slide 3: Métricas de referência -->
+  <section class="slide">
+    <div class="kicker">Indicadores do Método-Audience</div>
+    <h2>O que medimos</h2>
+    <div class="grid-3">
+      <div class="card">
+        <div class="metric">4x</div>
+        <div class="metric-label">Mais retenção em bastidores vs. conteúdo institucional</div>
+        <p style="margin-top: 12px;">Benchmark real de imobiliária alto padrão: conteúdo humano performa 4× mais que post puro de imóvel.</p>
+      </div>
+      <div class="card">
+        <div class="metric">23%</div>
+        <div class="metric-label">Aumento médio de engajamento com linha editorial estruturada</div>
+        <p style="margin-top: 12px;">Pilares claros + testes semanais de hooks geram crescimento consistente de engajamento em 90 dias.</p>
+      </div>
+      <div class="card">
+        <div class="metric">3.5x</div>
+        <div class="metric-label">ROAS médio em Meta Ads para imobiliária</div>
+        <p style="margin-top: 12px;">Campanhas de captação de corretores qualificados com criativos nativos performam acima da média do nicho.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Sistema -->
+  <section class="slide">
+    <div class="kicker">O Sistema</div>
+    <h2>4 pilares integrados</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h4>01 — Conteúdo + Studio</h4>
+        <p>Linha editorial mensal, roteiros por formato (reel, post, carrossel), calendário editorial com indicadores. O Studio define o DNA visual da marca.</p>
+      </div>
+      <div class="card">
+        <h4>02 — Assessoria Técnica</h4>
+        <p>Análise por método-audience. Medição de retenção, engajamento, saves, cliques no link. Testes A/B de hooks e formatos.</p>
+      </div>
+      <div class="card">
+        <h4>03 — IA Aplicada</h4>
+        <p>Análise de referências, extração de padrões vencedores, geração assistida de copy e prompts de edição. Banco de padrões vivo.</p>
+      </div>
+      <div class="card">
+        <h4>04 — Tráfego Pago</h4>
+        <p>Meta Ads com foco em captação de corretores qualificados. Google Ads para imóveis específicos. Acompanhamento semanal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Metodologia -->
+  <section class="slide">
+    <div class="kicker">Metodologia</div>
+    <h2>Como funciona na prática</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <strong>Semana 1:</strong> Diagnóstico do perfil atual + definição de 3–5 peças de referência do nicho.
+      </div>
+      <div class="timeline-item">
+        <strong>Semana 2:</strong> Criação da linha editorial + estrutura de testes A/B.
+      </div>
+      <div class="timeline-item">
+        <strong>Semana 3:</strong> Produção assistida por IA + primeiro lote de conteúdo.
+      </div>
+      <div class="timeline-item">
+        <strong>Semana 4:</strong> Análise de métricas + ajuste de estratégia + relatório de aprendizado.
+      </div>
+      <div class="timeline-item">
+        <strong>Contínuo:</strong> Ciclo de testes e otimização. O sistema aprende com cada semana.
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Entregas -->
+  <section class="slide">
+    <div class="kicker">Entregas</div>
+    <h2>O que você recebe</h2>
+    <ul>
+      <li>Linha editorial mensal com 4 pilares: curadoria, autoridade, educação, prova social</li>
+      <li>8–12 roteiros por semana (reels, posts, carrosséis)</li>
+      <li>Análise semanal de métricas com relatório de aprendizado</li>
+      <li>Banco de prompts e padrões visuais do Studio</li>
+      <li>Campanhas Meta Ads otimizadas para captação de corretores</li>
+      <li>Relatório mensal de crescimento e ROI</li>
+    </ul>
+  </section>
+
+  <!-- Slide 7: Investimento -->
+  <section class="slide">
+    <div class="kicker">Investimento</div>
+    <h2>Modelo de sistema</h2>
+    <div class="highlight-box">
+      <p style="margin: 0; font-size: 20px;"><strong>Investimento sob demanda</strong> — modelo flexível, sem menu de serviços soltos.</p>
+    </div>
+    <div class="grid-3" style="margin-top: 32px;">
+      <div class="card">
+        <h4>Piloto</h4>
+        <p style="color: var(--gold); font-size: 24px; font-weight: 700; margin: 12px 0;">1 mês</p>
+        <p>Validação da linha editorial + primeiros resultados + relatório completo.</p>
+      </div>
+      <div class="card">
+        <h4>Crescimento</h4>
+        <p style="color: var(--gold); font-size: 24px; font-weight: 700; margin: 12px 0;">3–6 meses</p>
+        <p>Otimização contínua, escala de produção, tráfego pago integrado.</p>
+      </div>
+      <div class="card">
+        <h4>Parceria</h4>
+        <p style="color: var(--gold); font-size: 24px; font-weight: 700; margin: 12px 0;">6+ meses</p>
+        <p>Sistema próprio, banco de padrões vivo, equipe dedicada.</p>
+      </div>
+    </div>
+    <p style="margin-top: 32px; font-size: 16px; color: var(--muted);">Valores sob demanda. Detalhes fechados após call de validação.</p>
+  </section>
+
+  <!-- Slide 8: Próximos passos -->
+  <section class="slide">
+    <div class="kicker">Próximos passos</div>
+    <h2>Para começar</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <strong>1.</strong> Call de validação do diagnóstico (30 min)
+      </div>
+      <div class="timeline-item">
+        <strong>2.</strong> Definição de 3–5 peças de referência do nicho
+      </div>
+      <div class="timeline-item">
+        <strong>3.</strong> Criação da linha editorial + estrutura de testes
+      </div>
+      <div class="timeline-item">
+        <strong>4.</strong> Primeiro lote de conteúdo em até 7 dias
+      </div>
+      <div class="timeline-item">
+        <strong>5.</strong> Análise semanal + ajustes contínuos
+      </div>
+    </div>
+    <a href="#" class="cta">Agendar call</a>
+  </section>
+
+  <!-- Slide 9: Fechamento -->
+  <section class="slide">
+    <div class="kicker">Homebrasília</div>
+    <h2>Conteúdo que converte imóvel alto padrão</h2>
+    <p>Sistema único: conteúdo + assessoria técnica + IA + tráfego.</p>
+    <div class="highlight-box">
+      <p style="margin: 0;"><strong>DIMUS</strong> — Curadoria de conteúdo, inteligência e propósito.</p>
+    </div>
+    <div class="footer">
+      <p>Proposta comercial Dimus • Homebrasília • <span id="year"></span></p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
